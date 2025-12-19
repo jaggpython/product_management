@@ -13,6 +13,15 @@ class ProductListView(ListView):
     template_name = "products/product_list.html"
     context_object_name = "products"
 
+    def get_queryset(self):
+        queryset = Product.objects.all().order_by("-id")
+
+        search_query = self.request.GET.get("q")
+        if search_query:
+            queryset = queryset.filter(name__icontains=search_query)
+
+        return queryset
+
 
 class ProductCreateView(CreateView):
     model = Product
