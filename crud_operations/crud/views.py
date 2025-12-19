@@ -12,7 +12,7 @@ class ProductListView(ListView):
     model = Product
     template_name = "products/product_list.html"
     context_object_name = "products"
-    paginate_by = 4
+    paginate_by = 10
 
     def get_queryset(self):
         queryset = Product.objects.all().order_by("-id")
